@@ -112,8 +112,8 @@ public class _01_APITest {
 
     @Test
     public void pathParamTest() {
-        given().pathParam("ulke", "us")  // değişkenler hazırlandı
-                .pathParam("pk", "90210") // değişkenler hazırlandı
+        given().pathParam("ulke", "us")  // değişkenler hazırlandı. ulke stringine us atandi.
+                .pathParam("pk", 90210) // değişkenler hazırlandı. pk stringine 90210 atandi.
                 .log().uri() // URI'yi logla . olusan endpointi yazdirma
 
                 .when().get("http://api.zippopotam.us/{ulke}/{pk}").then().log().body();
@@ -122,7 +122,7 @@ public class _01_APITest {
     @Test
     public void queryParamTest() {
         //https://gorest.co.in/public/v1/users?page=3
-        given().param("page", 3) // query parametre olarak page=3
+        given().queryParam("page", 3)// query parametre olarak page=3
                 .log().uri() // oluşacak endpoint i yazdıralım
                 .when().get("https://gorest.co.in/public/v1/users?page=3").then().log().body() // dönüş datalarını yaz / all: tüm dönüş bilgilerini yaz;
         ;
@@ -136,18 +136,14 @@ public class _01_APITest {
         // olup olmadığını kontrol ediniz.
 
         for (int p = 1; p <= 10; p++) {
-            given().param("page", p).log().uri()
-                    // query parametre olarak page=3
-                    .when().get("https://gorest.co.in/public/v1/users").then().body("meta.pagination.page", equalTo(p)) // response body içindeki meta.pagination.page değeri p ile eşit mi?
+            //queryParam,  Param aynı işlevi görür.
+            given()
+                    .queryParam("page", p)
+                    .log().uri()
+                    .when().get("https://gorest.co.in/public/v1/users" )
+                    .then()
+                    .body("meta.pagination.page", equalTo(p)) // response body içindeki meta.pagination.page değeri p ile eşit mi?
             ;
-        }
-
-        for (int p = 1; p <= 10; p++) {
-            given().param("page", p).log().uri()
-
-                    .when().get("https://gorest.co.in/public/v1/users")
-
-                    .then().body("meta.pagination.page", equalTo(p));
         }
     }
 

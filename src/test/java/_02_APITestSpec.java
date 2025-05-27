@@ -7,6 +7,7 @@ import io.restassured.specification.ResponseSpecification;
 import org.testng.annotations.*;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
 
 public class _02_APITestSpec {
     RequestSpecification reqSpec;
@@ -23,7 +24,9 @@ public class _02_APITestSpec {
 
         /// 2- Endpoint in çağrıldığı bölüm  : Endpoint in çağrılması(METOD: GET,POST ..)
         resSpec = new ResponseSpecBuilder() // cevap geldikten sonraki yapılacaklar
-                .log(LogDetail.BODY).build() // log.body
+                .log(LogDetail.BODY)
+                .expectContentType(ContentType.JSON)
+                .build() // log.body
         ;
     }
 
@@ -40,6 +43,16 @@ public class _02_APITestSpec {
     }
 
     @Test
+    public void Test01_01() {
+        given()
+                .spec(reqSpec) // request spec kullanılıyor
+                .when().get("https://gorest.co.in/public/v1/users") // endpoint çağrılıyor
+                .then()
+                .spec(resSpec) // response spec kullanılıyor
+        ;
+    }
+
+    @Test
     public void Test02() {
         given().contentType(ContentType.JSON) // giden body cinsi
                 .log().uri() // log.uri
@@ -48,6 +61,15 @@ public class _02_APITestSpec {
 
                 .then().contentType(ContentType.JSON)
                 .log().body()
+        ;
+    }
+    @Test
+    public void Test02_01() {
+        given()
+                .spec(reqSpec) // request spec kullanılıyor
+                .when().get("https://gorest.co.in/public/v1/users") // endpoint çağrılıyor
+                .then()
+                .spec(resSpec) // response spec kullanılıyor
         ;
     }
 }
