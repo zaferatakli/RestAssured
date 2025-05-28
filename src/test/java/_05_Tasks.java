@@ -26,6 +26,7 @@ public class _05_Tasks {
                 .body("title", equalTo("quis ut nam facilis et officia qui"))
                 .log().body();
     }
+
     /**
      * Task 2
      * create a request to https://jsonplaceholder.typicode.com/todos/2

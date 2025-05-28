@@ -66,19 +66,17 @@ public class _06_PathAndJsonPath {
 
     @Test
     public void extractingJsonPathObjectIn() {
-
         List<Place> places=
         given()
-
                 .when()
                 .get("http://api.zippopotam.us/us/90210")
 
                 .then()
-                .extract().jsonPath().getList("places", Place.class)
-        ;
+                .extract().jsonPath().getList("places", Place.class);
 
         System.out.println("places = " + places);
         // 2. Avantajı : Sadece Place dizisi lazım ise diğerlerini yazmak zorunda değilsin.
+        // 3. Avantajı : JsonPath ile class dönüşümü yaparak istediğimiz veriyi alabiliyoruz.
 
         // Daha önceki örneklerde (as) Clas dönüşümleri için tüm yapıya karşılık gelen
         // gereken tüm classları yazarak dönüştürüp istediğimiz elemanlara ulaşıyorduk.
@@ -96,7 +94,7 @@ public class _06_PathAndJsonPath {
         // https://gorest.co.in/public/v1/users  endpointte dönen Sadece Data Kısmını POJO
         // dönüşümü ile alarak yazdırınız.
 
-        List<User> userlar=
+        List<User> users =
         given()
 
                 .when()
@@ -106,26 +104,9 @@ public class _06_PathAndJsonPath {
                 .extract().jsonPath().getList("data", User.class);
         ;
 
-        System.out.println("userlar = " + userlar);
-
-        for(User u : userlar)
-            System.out.println("u = " + u);
+        System.out.println("users = " + users);
+        System.out.println("------------------------------");
+        for(User u : users){
+            System.out.println("u = " + u);}
     }
-
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
