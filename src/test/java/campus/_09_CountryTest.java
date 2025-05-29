@@ -145,7 +145,7 @@ public class _09_CountryTest {
 
                 .then()
                 .log().body()
-                .statusCode(406)  // Jenkins de hata görünmesi için hatalı yapıldı
+                .statusCode(400)  // Jenkins de hata görünmesi için hatalı yapıldı
         ;
     }
         /**<pre>/
